@@ -1,10 +1,13 @@
-# Utilisation de l'image officielle Nginx
-FROM nginx:alpine
+FROM node:23.8.0-alpine3.21
 
-# Copie des fichiers du site
-COPY src/ /usr/share/nginx/html/
+RUN mkdir -p /home/node/app/node_modules
 
-# Configuration du port d'écoute
-EXPOSE 80
+WORKDIR /home/node/app
 
-# Le conteneur démarre automatiquement Nginx
+COPY . ./
+
+RUN npm i
+
+EXPOSE 3000
+
+CMD ["npm", "start"] 
